@@ -1,0 +1,14 @@
+#ifndef _PERSONALASSISTANT_HH_
+#define _PERSONALASSISTANT_HH_
+#include <wx/wx.h>
+class CPersonalAssistant : public wxFrame
+{
+public:
+	CPersonalAssistant(const wxString& title, const wxPoint& pos, const wxSize& size);
+private:
+	void OnHello(wxCommandEvent& event);
+	void OnExit(wxCommandEvent& event);
+	void OnAbout(wxCommandEvent& event);
+	wxDECLARE_EVENT_TABLE();
+};
+#endif _PERSONALASSISTANT_HH_
