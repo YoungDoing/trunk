@@ -18,5 +18,33 @@ add_executable(PersonalAssistant ${DIR_SRCS})
 option(wxWidgets3.0 "use wxWidgets lib")
 
 if (wxWidgets3.0)
-	message("wxWidgets3.0 is defined")
+	INCLUDE_DIRECTORIES("E:/wxWidgets-3.0.4/include")
+	INCLUDE_DIRECTORIES("E:/wxWidgets-3.0.4/lib/vc_lib/mswud")
+	link_directories("E:/wxWidgets-3.0.4/lib/vc_lib")
+	link_libraries(
+		wxbase30ud_net.lib  
+		wxmsw30ud_html.lib  
+		wxbase30ud_xml.lib  
+		wxmsw30ud_adv.lib  
+		wxmsw30ud_aui.lib  
+		wxmsw30ud_gl.lib  
+		wxmsw30ud_media.lib  
+		wxmsw30ud_propgrid.lib  
+		wxmsw30ud_qa.lib  
+		wxmsw30ud_ribbon.lib  
+		wxmsw30ud_richtext.lib  
+		wxmsw30ud_stc.lib  
+		wxmsw30ud_xrc.lib  
+		wxscintillad.lib  
+		wxmsw30ud_core.lib  
+		wxbase30ud.lib  
+		wxjpegd.lib  
+		wxpngd.lib  
+		wxzlibd.lib  
+		wxexpatd.lib  
+		winmm.lib  
+		comctl32.lib  
+		rpcrt4.lib  
+		wsock32.lib  
+		odbc32.lib)
 endif(wxWidgets3.0)
