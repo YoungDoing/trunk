@@ -12,16 +12,27 @@ AUX_SOURCE_DIRECTORY(src DIR_SRCS)
 
 #指定源文件
 #用变量的方式默认路径下的所有源文件
-add_executable(PersonalAssistant ${DIR_SRCS})
+#add_executable(PersonalAssistant ${DIR_SRCS})
 
 #set extern libraries
 option(wxWidgets3.0 "use wxWidgets lib")
+option(WIN32_WINDOW "Set as Window Program")
 
+#添加编译参数
+add_definitions(-DDBUG)
+
+#设置成窗口程序
+IF(WIN32_WINDOW)
+    SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /SUBSYSTEM:WINDOWS") 
+ENDIF(WIN32_WINDOW)
+
+#添加WX库
 if (wxWidgets3.0)
 	INCLUDE_DIRECTORIES("E:/wxWidgets-3.0.4/include")
 	INCLUDE_DIRECTORIES("E:/wxWidgets-3.0.4/lib/vc_lib/mswud")
+	
 	link_directories("E:/wxWidgets-3.0.4/lib/vc_lib")
-	link_libraries(
+	set(PROJECT_WX_LIBS
 		wxbase30ud_net.lib  
 		wxmsw30ud_html.lib  
 		wxbase30ud_xml.lib  
@@ -47,4 +58,6 @@ if (wxWidgets3.0)
 		rpcrt4.lib  
 		wsock32.lib  
 		odbc32.lib)
+	add_executable(PersonalAssistant ${DIR_SRCS})
+	TARGET_LINK_LIBRARIES(PersonalAssistant ${PROJECT_WX_LIBS})
 endif(wxWidgets3.0)
