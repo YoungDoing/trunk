@@ -1,5 +1,10 @@
 #include "PersonalAssistant.h"
+#include <wx/listbase.h>
+#include <wx/msgdlg.h> 
 
+wxBEGIN_EVENT_TABLE(CPersonalAssistant, wxFrame)
+EVT_LIST_ITEM_SELECTED(wxID_ANY, CPersonalAssistant::CallTool)
+wxEND_EVENT_TABLE()
 
 CPersonalAssistant::CPersonalAssistant(wxWindow* parent, wxWindowID id, const wxString& title,
 	const wxPoint& pos, const wxSize& size, long style)
@@ -15,7 +20,9 @@ CPersonalAssistant::CPersonalAssistant(wxWindow* parent, wxWindowID id, const wx
 	SetGUIToolBar();
 	SetGUIMenuBar();
 	SetGUILayout();
-
+	
+	m_status = new wxStatusBar(this);
+	m_status->Layout();
 	this->Centre(wxBOTH);
 }
 
@@ -36,8 +43,21 @@ void CPersonalAssistant::AddLCTool()
 
 	wxListItem itemCol;
 	itemCol.SetText(wxT("Tools"));
-	itemCol.SetImage(1);
-	m_lcToolSelect->InsertItem(0, wxT("CodeNote"), 0);
+	//itemCol.SetImage(0);
+	m_lcToolSelect->InsertItem(0, wxT("CodeNote"),0);
+	//itemCol.SetImage(0);
+	m_lcToolSelect->InsertItem(1, wxT("Reminder"),0);
+}
+
+void CPersonalAssistant::CallTool(wxListEvent& event)
+{
+	wxString sstring="Personal Assistant";
+
+	sstring.Printf("Selected Tool %d", event.GetIndex());
+
+	wxMessageBox(sstring, "Personal Assistant");
+
+	
 }
 
 void CPersonalAssistant::SetGUIMenuBar()
@@ -54,7 +74,7 @@ void CPersonalAssistant::SetGUILayout()
 	wxBoxSizer* bSizerTop;
 	bSizerTop = new wxBoxSizer(wxVERTICAL);
 	bSizerTop->Add(m_toolbar1, 0, wxEXPAND, 5);
-	bSizerTop->Add(m_toolbar2, 0, wxEXPAND, 5);
+	//bSizerTop->Add(m_toolbar2, 0, wxEXPAND, 5);
 	bSizerTop->Add(m_lcToolSelect, 0, wxEXPAND, 5);
 
 	this->SetSizer(bSizerTop);
@@ -64,16 +84,16 @@ void CPersonalAssistant::SetGUILayout()
 void CPersonalAssistant::SetGUIToolBar()
 {
 	m_toolbar1 = new wxToolBar(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTB_HORIZONTAL);
-	m_toolbar2 = new wxToolBar(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTB_HORIZONTAL);
+	//m_toolbar2 = new wxToolBar(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTB_HORIZONTAL);
 
 	wxBitmap pa(15, 15);
 	pa.LoadFile("pa.bmp", wxBITMAP_TYPE_BMP);
 	pa.SetSize(wxSize(15, 15));
 	m_tool1 = m_toolbar1->AddTool(wxID_ANY, wxT("tool"), pa, pa, wxITEM_NORMAL, wxEmptyString, wxEmptyString, NULL);
-	m_tool1 = m_toolbar2->AddTool(wxID_ANY, wxT("tool"), pa, pa, wxITEM_NORMAL, wxEmptyString, wxEmptyString, NULL);
+	//m_tool1 = m_toolbar2->AddTool(wxID_ANY, wxT("tool"), pa, pa, wxITEM_NORMAL, wxEmptyString, wxEmptyString, NULL);
 
 	m_toolbar1->Realize();
-	m_toolbar2->Realize();
+	//m_toolbar2->Realize();
 }
 
 CPersonalAssistant::~CPersonalAssistant()

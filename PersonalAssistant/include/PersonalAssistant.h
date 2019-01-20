@@ -36,10 +36,11 @@ protected:
 	wxMenuBar* m_menubar1;
 	wxMenu* m_menuLogin;
 
+	//statusbar
+	wxStatusBar *m_status;
+
 	//Tool Select ListCtrl
 	wxListCtrl* m_lcToolSelect;
-
-	//PA Tool Icon
 	
 //private function
 private:
@@ -47,6 +48,7 @@ private:
 	void SetGUIToolBar();
 	void SetGUILayout();
 	void AddLCTool();
+	void CallTool(wxListEvent& event);
 	wxDECLARE_EVENT_TABLE();
 };
 
